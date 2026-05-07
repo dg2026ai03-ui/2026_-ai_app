@@ -15,23 +15,19 @@ st.set_page_config(
 # ─────────────────────────────────────────
 st.markdown("""
 <style>
-    /* 구글 폰트 */
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
 
-    /* 전체 배경 */
     .stApp {
         background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
         font-family: 'Noto Sans KR', sans-serif;
     }
 
-    /* 메인 컨테이너 */
     .block-container {
         padding-top: 2rem;
         padding-bottom: 2rem;
         max-width: 780px;
     }
 
-    /* 헤더 타이틀 */
     .main-title {
         text-align: center;
         padding: 2.5rem 1rem 1rem;
@@ -53,77 +49,6 @@ st.markdown("""
         letter-spacing: 0.5px;
     }
 
-    /* 모델 선택 카드 */
-    .model-card {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 1.2rem 1.5rem;
-        margin-bottom: 1.5rem;
-        backdrop-filter: blur(10px);
-    }
-
-    .model-card-title {
-        color: rgba(255, 255, 255, 0.6);
-        font-size: 0.75rem;
-        font-weight: 500;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        margin-bottom: 0.8rem;
-    }
-
-    /* 사용량 카드 */
-    .usage-card {
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.15));
-        border: 1px solid rgba(102, 126, 234, 0.3);
-        border-radius: 16px;
-        padding: 1.2rem 1.5rem;
-        margin: 1rem 0;
-        backdrop-filter: blur(10px);
-    }
-
-    .usage-label {
-        color: rgba(255, 255, 255, 0.5);
-        font-size: 0.72rem;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        margin-bottom: 0.3rem;
-    }
-
-    .usage-value {
-        color: #a78bfa;
-        font-size: 1.4rem;
-        font-weight: 700;
-    }
-
-    .usage-total {
-        color: rgba(255, 255, 255, 0.35);
-        font-size: 0.78rem;
-        margin-top: 0.8rem;
-        text-align: right;
-    }
-
-    /* 채팅 메시지 - 사용자 */
-    .stChatMessage[data-testid="stChatMessageUser"] {
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2)) !important;
-        border: 1px solid rgba(102, 126, 234, 0.3) !important;
-        border-radius: 18px 18px 4px 18px !important;
-        padding: 1rem 1.2rem !important;
-        margin-bottom: 1rem !important;
-        backdrop-filter: blur(10px) !important;
-    }
-
-    /* 채팅 메시지 - AI */
-    .stChatMessage[data-testid="stChatMessageAssistant"] {
-        background: rgba(255, 255, 255, 0.04) !important;
-        border: 1px solid rgba(255, 255, 255, 0.08) !important;
-        border-radius: 18px 18px 18px 4px !important;
-        padding: 1rem 1.2rem !important;
-        margin-bottom: 1rem !important;
-        backdrop-filter: blur(10px) !important;
-    }
-
-    /* 채팅 입력창 */
     .stChatInput textarea {
         background: rgba(255, 255, 255, 0.07) !important;
         border: 1px solid rgba(255, 255, 255, 0.15) !important;
@@ -131,9 +56,6 @@ st.markdown("""
         color: white !important;
         font-family: 'Noto Sans KR', sans-serif !important;
         font-size: 0.95rem !important;
-        padding: 0.9rem 1.2rem !important;
-        backdrop-filter: blur(10px) !important;
-        transition: border 0.2s ease !important;
     }
 
     .stChatInput textarea:focus {
@@ -141,7 +63,6 @@ st.markdown("""
         box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15) !important;
     }
 
-    /* 셀렉트박스 */
     .stSelectbox > div > div {
         background: rgba(255, 255, 255, 0.07) !important;
         border: 1px solid rgba(255, 255, 255, 0.12) !important;
@@ -149,18 +70,15 @@ st.markdown("""
         color: white !important;
     }
 
-    /* 슬라이더 */
     .stSlider > div > div > div > div {
         background: linear-gradient(90deg, #667eea, #764ba2) !important;
     }
 
-    /* 버튼 */
     .stButton > button {
         background: linear-gradient(135deg, #667eea, #764ba2) !important;
         color: white !important;
         border: none !important;
         border-radius: 12px !important;
-        padding: 0.6rem 1.2rem !important;
         font-family: 'Noto Sans KR', sans-serif !important;
         font-weight: 500 !important;
         font-size: 0.88rem !important;
@@ -174,40 +92,12 @@ st.markdown("""
         box-shadow: 0 6px 20px rgba(102, 126, 234, 0.35) !important;
     }
 
-    /* expander */
-    .streamlit-expanderHeader {
-        background: rgba(255, 255, 255, 0.03) !important;
-        border: 1px solid rgba(255, 255, 255, 0.08) !important;
-        border-radius: 10px !important;
-        color: rgba(255, 255, 255, 0.5) !important;
-        font-size: 0.82rem !important;
-    }
-
-    .streamlit-expanderContent {
-        background: rgba(255, 255, 255, 0.02) !important;
-        border: 1px solid rgba(255, 255, 255, 0.06) !important;
-        border-top: none !important;
-        border-radius: 0 0 10px 10px !important;
-    }
-
-    /* 사이드바 */
     [data-testid="stSidebar"] {
         background: rgba(15, 12, 41, 0.85) !important;
         border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
         backdrop-filter: blur(20px) !important;
     }
 
-    [data-testid="stSidebar"] .block-container {
-        padding-top: 1.5rem !important;
-    }
-
-    /* 사이드바 텍스트 */
-    [data-testid="stSidebar"] label,
-    [data-testid="stSidebar"] .stMarkdown p {
-        color: rgba(255, 255, 255, 0.7) !important;
-    }
-
-    /* metric */
     [data-testid="stMetric"] {
         background: rgba(255, 255, 255, 0.04) !important;
         border: 1px solid rgba(255, 255, 255, 0.08) !important;
@@ -226,37 +116,23 @@ st.markdown("""
         font-weight: 700 !important;
     }
 
-    /* 구분선 */
     hr {
         border: none !important;
         border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
         margin: 1.5rem 0 !important;
     }
 
-    /* 스크롤바 */
-    ::-webkit-scrollbar {
-        width: 5px;
-    }
-    ::-webkit-scrollbar-track {
-        background: transparent;
-    }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb {
         background: rgba(102, 126, 234, 0.4);
         border-radius: 10px;
     }
 
-    /* 에러/경고 메시지 */
-    .stAlert {
-        border-radius: 12px !important;
-        border: none !important;
-    }
-
-    /* 텍스트 색상 전체 */
     .stMarkdown, .stText, p, li, span {
         color: rgba(255, 255, 255, 0.85);
     }
 
-    /* 배지 스타일 */
     .badge {
         display: inline-block;
         background: linear-gradient(135deg, rgba(102,126,234,0.25), rgba(118,75,162,0.25));
@@ -269,7 +145,6 @@ st.markdown("""
         margin: 0.2rem;
     }
 
-    /* 웰컴 박스 */
     .welcome-box {
         background: rgba(255,255,255,0.03);
         border: 1px solid rgba(255,255,255,0.08);
@@ -279,18 +154,12 @@ st.markdown("""
         margin: 1.5rem 0;
     }
 
-    .welcome-icon {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-    }
-
     .welcome-text {
         color: rgba(255,255,255,0.5);
         font-size: 0.9rem;
         line-height: 1.8;
     }
 
-    /* 사이드바 섹션 헤더 */
     .sidebar-section {
         color: rgba(255,255,255,0.35);
         font-size: 0.7rem;
@@ -305,12 +174,34 @@ st.markdown("""
 
 
 # ─────────────────────────────────────────
-# API 키 불러오기
+# ✅ API 키 불러오기 + 정제 (핵심 수정!)
 # ─────────────────────────────────────────
+def clean_api_key(key: str) -> str:
+    """API 키에서 공백, 줄바꿈, 비ASCII 문자를 모두 제거"""
+    key = key.strip()                          # 앞뒤 공백/줄바꿈 제거
+    key = key.replace('\n', '')                # 줄바꿈 제거
+    key = key.replace('\r', '')                # 캐리지 리턴 제거
+    key = key.replace(' ', '')                 # 중간 공백 제거
+    key = key.encode('ascii', 'ignore').decode('ascii')  # 비ASCII 문자 제거
+    return key
+
 try:
-    api_key = st.secrets["ANTHROPIC_API_KEY"]
+    raw_key = st.secrets["ANTHROPIC_API_KEY"]
+    api_key = clean_api_key(str(raw_key))
+
+    # API 키 기본 형식 검증
+    if not api_key.startswith("sk-ant-"):
+        st.error("❌ API 키 형식이 올바르지 않습니다. 'sk-ant-'로 시작해야 합니다.")
+        st.code(f"현재 키 앞 10자리: {api_key[:10]}...", language="text")
+        st.stop()
+
+    if len(api_key) < 40:
+        st.error("❌ API 키가 너무 짧습니다. 키를 다시 확인해주세요.")
+        st.stop()
+
 except KeyError:
-    st.error("❌ API 키가 설정되지 않았습니다. Streamlit Cloud의 Secrets에 ANTHROPIC_API_KEY를 등록해주세요.")
+    st.error("❌ API 키가 없습니다. Streamlit Cloud Secrets에 아래와 같이 등록해주세요.")
+    st.code('ANTHROPIC_API_KEY = "sk-ant-api03-여기에_키_입력"', language="toml")
     st.stop()
 
 
@@ -333,7 +224,6 @@ if "total_requests" not in st.session_state:
 # 사이드바
 # ─────────────────────────────────────────
 with st.sidebar:
-    # 로고 영역
     st.markdown("""
         <div style='text-align:center; padding: 1rem 0 1.5rem;'>
             <div style='font-size:2.5rem; margin-bottom:0.4rem;'>✨</div>
@@ -349,19 +239,17 @@ with st.sidebar:
         </div>
     """, unsafe_allow_html=True)
 
-    # 모델 선택
     st.markdown('<div class="sidebar-section">🧠 모델 선택</div>', unsafe_allow_html=True)
     model_option = st.selectbox(
         label="model",
         options=["claude-sonnet-4-5", "claude-opus-4-5"],
         format_func=lambda x: {
-            "claude-sonnet-4-5": "⚡ Sonnet 4.5  — 빠르고 효율적",
-            "claude-opus-4-5":   "🏆 Opus 4.5   — 가장 강력함",
+            "claude-sonnet-4-5": "⚡ Sonnet 4.5 — 빠르고 효율적",
+            "claude-opus-4-5":   "🏆 Opus 4.5  — 가장 강력함",
         }[x],
         label_visibility="collapsed",
     )
 
-    # 모델 설명 배지
     if model_option == "claude-sonnet-4-5":
         st.markdown("""
             <div style='margin-top:0.5rem;'>
@@ -381,7 +269,6 @@ with st.sidebar:
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # 토큰 슬라이더
     st.markdown('<div class="sidebar-section">📏 응답 길이</div>', unsafe_allow_html=True)
     max_tokens = st.slider(
         label="tokens",
@@ -390,17 +277,16 @@ with st.sidebar:
         value=1024,
         step=256,
         label_visibility="collapsed",
-        help="값이 클수록 더 긴 답변을 받을 수 있습니다."
     )
     st.markdown(
-        f"<div style='text-align:right; color:rgba(255,255,255,0.35); font-size:0.78rem; margin-top:-0.5rem;'>"
+        f"<div style='text-align:right; color:rgba(255,255,255,0.35);"
+        f"font-size:0.78rem; margin-top:-0.5rem;'>"
         f"최대 <b style='color:#a78bfa;'>{max_tokens:,}</b> 토큰</div>",
         unsafe_allow_html=True
     )
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # 누적 사용량
     st.markdown('<div class="sidebar-section">📊 세션 사용량</div>', unsafe_allow_html=True)
     col1, col2 = st.columns(2)
     with col1:
@@ -413,7 +299,6 @@ with st.sidebar:
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # 초기화 버튼들
     col_a, col_b = st.columns(2)
     with col_a:
         if st.button("🗑️ 대화 초기화", use_container_width=True):
@@ -437,33 +322,22 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# ─────────────────────────────────────────
-# 현재 선택 모델 표시
-# ─────────────────────────────────────────
 model_display = {
     "claude-sonnet-4-5": ("⚡", "Claude Sonnet 4.5", "#667eea"),
     "claude-opus-4-5":   ("🏆", "Claude Opus 4.5",   "#f093fb"),
 }
 icon, name, color = model_display[model_option]
 st.markdown(f"""
-    <div style='
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        margin-bottom: 1.5rem;
-    '>
+    <div style='display:flex; align-items:center; justify-content:center; margin-bottom:1.5rem;'>
         <div style='
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 30px;
             padding: 0.4rem 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            display: flex; align-items: center; gap: 0.5rem;
         '>
             <span>{icon}</span>
-            <span style='color: {color}; font-size: 0.85rem; font-weight: 600;'>{name}</span>
+            <span style='color:{color}; font-size:0.85rem; font-weight:600;'>{name}</span>
             <span style='
                 background: rgba(255,255,255,0.1);
                 color: rgba(255,255,255,0.4);
@@ -478,20 +352,22 @@ st.markdown(f"""
 
 
 # ─────────────────────────────────────────
-# 웰컴 메시지 (대화 없을 때)
+# 웰컴 메시지
 # ─────────────────────────────────────────
 if not st.session_state.messages:
     st.markdown("""
         <div class="welcome-box">
-            <div class="welcome-icon">💬</div>
-            <div style='color:rgba(255,255,255,0.8); font-size:1.05rem; font-weight:600; margin-bottom:0.7rem;'>
+            <div style='font-size:3rem; margin-bottom:1rem;'>💬</div>
+            <div style='color:rgba(255,255,255,0.8); font-size:1.05rem;
+                        font-weight:600; margin-bottom:0.7rem;'>
                 무엇이든 물어보세요!
             </div>
             <div class="welcome-text">
                 코딩 · 글쓰기 · 번역 · 분석 · 요약<br>
                 어떤 주제든 도움을 드릴 수 있어요 ✨
             </div>
-            <div style='margin-top:1.2rem; display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap;'>
+            <div style='margin-top:1.2rem; display:flex; gap:0.5rem;
+                        justify-content:center; flex-wrap:wrap;'>
                 <span class='badge'>💡 아이디어 제안</span>
                 <span class='badge'>🔍 정보 검색</span>
                 <span class='badge'>📝 문서 작성</span>
@@ -508,83 +384,102 @@ for i, message in enumerate(st.session_state.messages):
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-        # AI 메시지 아래 토큰 사용량
         if message["role"] == "assistant":
-            usage_index = sum(1 for m in st.session_state.messages[:i+1] if m["role"] == "assistant") - 1
-            if usage_index < len(st.session_state.usage_history):
-                usage = st.session_state.usage_history[usage_index]
+            assistant_index = sum(
+                1 for m in st.session_state.messages[:i]
+                if m["role"] == "assistant"
+            )
+            if assistant_index < len(st.session_state.usage_history):
+                usage = st.session_state.usage_history[assistant_index]
                 with st.expander("📊 토큰 사용량 보기"):
                     c1, c2, c3 = st.columns(3)
                     c1.metric("📥 입력", f"{usage['input_tokens']:,}")
                     c2.metric("📤 출력", f"{usage['output_tokens']:,}")
-                    c3.metric("🔤 합계", f"{usage['input_tokens'] + usage['output_tokens']:,}")
+                    c3.metric("🔤 합계",
+                              f"{usage['input_tokens'] + usage['output_tokens']:,}")
                     st.markdown(
-                        f"<div style='color:rgba(255,255,255,0.3); font-size:0.78rem; margin-top:0.3rem;'>"
-                        f"🧠 모델: <code style='color:#a78bfa;'>{usage['model']}</code></div>",
+                        f"<div style='color:rgba(255,255,255,0.3); font-size:0.78rem;'>"
+                        f"🧠 모델: <code style='color:#a78bfa;'>"
+                        f"{usage['model']}</code></div>",
                         unsafe_allow_html=True
                     )
 
 
 # ─────────────────────────────────────────
-# 채팅 입력
+# 사용자 입력 & API 호출
 # ─────────────────────────────────────────
 if user_input := st.chat_input("메시지를 입력하세요..."):
 
-    # 사용자 메시지
+    # 사용자 메시지 저장 + 출력
     st.session_state.messages.append({"role": "user", "content": user_input})
     with st.chat_message("user"):
         st.markdown(user_input)
 
-    # AI 응답
-    with st.chat_message("assistant"):
-        with st.spinner(""):
-            st.markdown("""
-                <div style='color:rgba(255,255,255,0.4); font-size:0.85rem; padding:0.3rem 0;'>
-                    ✨ Claude가 생각하는 중...
-                </div>
-            """, unsafe_allow_html=True)
-            try:
-                client = anthropic.Anthropic(api_key=api_key)
-                response = client.messages.create(
-                    model=model_option,
-                    max_tokens=max_tokens,
-                    messages=[
-                        {"role": m["role"], "content": m["content"]}
-                        for m in st.session_state.messages
-                    ],
+    # API 호출
+    answer        = None
+    input_tokens  = 0
+    output_tokens = 0
+    error_msg     = None
+
+    with st.spinner("✨ Claude가 생각하는 중..."):
+        try:
+            client = anthropic.Anthropic(api_key=api_key)
+            response = client.messages.create(
+                model=model_option,
+                max_tokens=max_tokens,
+                messages=[
+                    {"role": m["role"], "content": m["content"]}
+                    for m in st.session_state.messages
+                ],
+            )
+            answer        = response.content[0].text
+            input_tokens  = response.usage.input_tokens
+            output_tokens = response.usage.output_tokens
+
+        except anthropic.AuthenticationError:
+            error_msg = "❌ API 키 인증 실패! Secrets에서 키를 다시 확인해주세요."
+        except anthropic.RateLimitError:
+            error_msg = "⚠️ API 사용량 한도 초과! 잠시 후 다시 시도해주세요."
+        except anthropic.BadRequestError as e:
+            error_msg = f"🚫 잘못된 요청: {e}"
+        except UnicodeEncodeError as e:
+            error_msg = (
+                f"❌ API 키 인코딩 오류!\n\n"
+                f"Secrets에서 API 키에 **공백이나 특수문자**가 없는지 확인해주세요.\n\n"
+                f"```\n{e}\n```"
+            )
+        except Exception as e:
+            error_msg = (
+                f"🚨 예상치 못한 오류!\n\n"
+                f"```\n{type(e).__name__}: {e}\n```"
+            )
+
+    # 결과 출력
+    if error_msg:
+        st.error(error_msg)
+        # 에러 시 마지막 사용자 메시지도 제거 (재시도 가능하도록)
+        st.session_state.messages.pop()
+
+    else:
+        with st.chat_message("assistant"):
+            st.markdown(answer)
+            with st.expander("📊 토큰 사용량 보기"):
+                c1, c2, c3 = st.columns(3)
+                c1.metric("📥 입력", f"{input_tokens:,}")
+                c2.metric("📤 출력", f"{output_tokens:,}")
+                c3.metric("🔤 합계", f"{input_tokens + output_tokens:,}")
+                st.markdown(
+                    f"<div style='color:rgba(255,255,255,0.3); font-size:0.78rem;'>"
+                    f"🧠 모델: <code style='color:#a78bfa;'>{model_option}</code></div>",
+                    unsafe_allow_html=True
                 )
 
-                answer       = response.content[0].text
-                input_tokens = response.usage.input_tokens
-                output_tokens= response.usage.output_tokens
-
-                st.markdown(answer)
-
-                with st.expander("📊 토큰 사용량 보기"):
-                    c1, c2, c3 = st.columns(3)
-                    c1.metric("📥 입력", f"{input_tokens:,}")
-                    c2.metric("📤 출력", f"{output_tokens:,}")
-                    c3.metric("🔤 합계", f"{input_tokens + output_tokens:,}")
-                    st.markdown(
-                        f"<div style='color:rgba(255,255,255,0.3); font-size:0.78rem; margin-top:0.3rem;'>"
-                        f"🧠 모델: <code style='color:#a78bfa;'>{model_option}</code></div>",
-                        unsafe_allow_html=True
-                    )
-
-                # 세션 업데이트
-                st.session_state.messages.append({"role": "assistant", "content": answer})
-                st.session_state.usage_history.append({
-                    "input_tokens": input_tokens,
-                    "output_tokens": output_tokens,
-                    "model": model_option,
-                })
-                st.session_state.total_input_tokens  += input_tokens
-                st.session_state.total_output_tokens += output_tokens
-                st.session_state.total_requests      += 1
-
-            except anthropic.AuthenticationError:
-                st.error("❌ API 키가 올바르지 않습니다. Secrets 설정을 확인해주세요.")
-            except anthropic.RateLimitError:
-                st.error("⚠️ API 사용량 한도를 초과했습니다. 잠시 후 다시 시도해주세요.")
-            except anthropic.APIError as e:
-                st.error(f"🚨 API 오류가 발생했습니다: {e}")
+        st.session_state.messages.append({"role": "assistant", "content": answer})
+        st.session_state.usage_history.append({
+            "input_tokens":  input_tokens,
+            "output_tokens": output_tokens,
+            "model":         model_option,
+        })
+        st.session_state.total_input_tokens  += input_tokens
+        st.session_state.total_output_tokens += output_tokens
+        st.session_state.total_requests      += 1
